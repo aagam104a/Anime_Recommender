@@ -2,9 +2,18 @@ import streamlit as st
 import joblib
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
+import os
 
-anime_names = joblib.load('anime_names.pkl')
-tfidf_matrix = joblib.load('cosine_similarity_matrix.pkl')
+# Define the directory path
+directory = os.path.dirname(os.path.realpath(__file__))
+
+# Load anime names
+anime_names_path = os.path.join(directory, 'anime_names.pkl')
+anime_names = joblib.load(anime_names_path)
+
+# Load cosine similarity matrix
+cosine_similarity_matrix_path = os.path.join(directory, 'cosine_similarity_matrix.pkl')
+tfidf_matrix = joblib.load(cosine_similarity_matrix_path)
 
 def recommend_similar_anime(anime_name, top_n=10):
     try:
